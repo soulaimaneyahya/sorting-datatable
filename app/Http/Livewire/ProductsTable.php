@@ -9,7 +9,7 @@ class ProductsTable extends Component
 {
     public function render()
     {
-        $products = Product::latest()->orderBy('position')->paginate(10);
+        $products = Product::orderBy('position')->paginate(10);
         return view('livewire.products-table', compact('products'));
     }
 
