@@ -14,15 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        //$this->call(ProductTableSeeder::class);
-        \App\Models\Product::factory(20)->create();
-        \App\Models\User::factory(10)->create();
+        if( $this->command->confirm("Do You want to refresh the DB ?")){
+            $this->command->call('migrate:fresh');
+            $this->command->info('---------------------------------- database refreshed');
+        }
+        $this->call([
+            ProductSeeder::class,
+        ]);
+        $this->command->info("---------------------------------- thanks seeder");
     }
 }

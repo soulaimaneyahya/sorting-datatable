@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -14,6 +14,12 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $productsCount = max((int)$this->command->ask("How many products would you like ?", 5), 1);
+        // products
+        Product::factory($productsCount)->make()->each(function($product){
+            $position = Product::max('position') + 1;
+            $product->position = $position;
+            $product->save();
+        });
     }
 }
