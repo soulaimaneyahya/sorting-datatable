@@ -27,7 +27,9 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request): RedirectResponse
     {
-        $product = Product::create($request->validated());
+        $position = Product::max('position') + 1;
+        // dd($position);
+        $product = Product::create($request->validated() + ['position' => $position]);
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images');
             $product->image()->save(
@@ -76,6 +78,12 @@ class ProductController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
+        /**
+         * position decrement all above products
+         * softDeletes Product
+         * Delet Image from Storage & db table
+         */
+        Product::where('position', '>', $product->position)->decrement('position', 1);
         $product->delete();
         Storage::delete($product->image->path);
         $product->image->delete();
