@@ -18,7 +18,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => fake()->name,
-            'detail' => fake()->paragraph($nbSentences = 5, $variableNbSentences = true)
+            'detail' => fake()->paragraph($nbSentences = 5, $variableNbSentences = true),
+            'price' => fake()->randomFloat($nbMaxDecimals = 2, $min = 1, $max = NULL) // 48.8932
         ];
     }
 }

@@ -26,6 +26,7 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => 'required',
             'detail' => 'required:max:500',
+            'price' => 'required:min:1',
             'thumbnail' => 'image|mimes:jpg,jpeg,png,gif,svg|max:1024'
             // |dimensions:min_height=800
         ];

@@ -6,6 +6,7 @@ Laravel Sorting Products with Livewire Drag-Drop
 ## Screenshots
 
 <img src="./public/img/1.png" />
+<img src="./public/img/checkout.png" />
 
 ---
 
